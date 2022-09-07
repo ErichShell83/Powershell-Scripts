@@ -1,0 +1,19 @@
+#
+#Windows Powershell Script for AD DS Deployment
+#Add a DC to an existing forest
+
+$Forest = Read-Host " What forest to you want to add this DC to?"
+
+Import-Module ADDSDeployment
+Install-ADDSDomainController `
+-NoGlobalCatalog:$false `
+-CreateDnsDelegation:$false `
+-CriticalReplicationOnly:$false `
+-DatabasePath "C:\Windows\NTDS" `
+-DomainName $Forest `
+-InstallDns:$true `
+-LogPath "C:\Windows\NTDS" `
+-NoRebootOnCompletion:$false `
+-SiteName "Default-First-Site-Name" `
+-SysvolPath "C:\Windows\SYSVOL" `
+-Force:$true
