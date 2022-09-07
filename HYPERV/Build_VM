@@ -1,0 +1,34 @@
+#Builds and Starts Hyper-V VM and enables numlock
+#Numlock is enabled
+#Variables
+$Name = Read-Host "VM Name?"
+$Iso = read-host "what Iso? options Kali, Win10, WinServ, Ubuntu, Kubunto, pfSense, Rocky, Server16" #change these to match your file path
+$Switch = Read-host "What Switch do you want to install? Options Private 1, Default Switch, Sec Internal, External Hard Wired"
+$HDPath = "D:\hyperv\vm\$name.vhdx" #file path you want your hardrive to have
+$Ram = Read-Host "How much RAM do you want this machine to have? -Example 4GB for 4GB"
+$HD = Read-Host "What size Hard drive? -Example 25GB for 25GB"
+
+#Cmdlets
+#New machine
+New-VM `
+-Name $Name `
+-path "D:\Hyperv\VM\$Name" `#Change to match path you want your machine saved to
+-MemoryStartupBytes $Ram `
+-NewVHDPath $HDPath `
+-NewVHDSizeBytes $HD `
+-SwitchName $Switch `
+-Generation 1 `# Select Generation you want
+-BootDevice CD 
+#Add ISO
+set-VMDvdDrive `
+-VMName $Name `
+-ControllerNumber 1 `
+-ControllerLocation 0 `
+-Path "D:\Hyperv\ISO\$iso.iso"
+#Enable Numlock
+Set-VMBios `
+-VMName $Name `
+-EnableNumLock
+#Start Machine
+Start-Vm `
+-Name $Name
