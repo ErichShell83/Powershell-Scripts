@@ -1,0 +1,21 @@
+#Variables
+$Name = Read-Host "Name"
+$Password = Read-Host "Password" -AsSecureString
+$Pass2 = 1
+$Name1 = Read-Host "First Name"
+$Name2 = Read-Host "Last Name"
+$Server = Read-Host "Server?"
+$OU = Read-Host "What OU should I place this User in?"
+$PName = Read-Host "Logon Name?"
+
+#Commands
+New-ADUser `
+-UserPrincipalName $PName `
+-Name $Name `
+-GivenName $Name1 `
+-Surname $Name2 `
+-Enabled 0 `
+-AccountPassword $Password `
+-ChangePasswordAtLogon 1 `
+-Path "ou=$OU,DC=testlab,DC=local" `#modify this path to meet your needs
+-Server $Server `
