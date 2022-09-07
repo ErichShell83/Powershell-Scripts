@@ -1,8 +1,7 @@
-#
-#Windows Powershell Script for AD DS Deployment
-#Add a DC to an existing forest
+# Windows Powershell Script for AD DS Deployment
+# Add a DC to an existing forest
 
-$Forest = Read-Host " What forest to you want to add this DC to?"
+$Forest = Read-Host "What forest to you want to add this DC to?"
 
 Import-Module ADDSDeployment
 Install-ADDSDomainController `
