@@ -1,0 +1,11 @@
+# Script to change IPv4 address and set DNS Server
+$Sub = Read-Host(What CIDR Notation?)
+New-NetIPAddress `
+-IPAddress $IP `
+-InterfaceAlias "Ethernet" `#modify this line to correct interface, or use get-netadapter
+-AddressFamily IPv4 `
+-PrefixLength $Sub
+Set-DnsClientServerAddress `
+-InterfaceAlias "Ethernet" `
+-ServerAddresses $DNS `
+-Verbose
