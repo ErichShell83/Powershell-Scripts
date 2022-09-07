@@ -1,0 +1,42 @@
+#Creates DHCP Scope and Activates it
+#Variables
+$name = read-host "What do you want to call the scope?"
+$Range1 = read-host "Start Range? I.E. 192.168.1.1"
+$Range2 = Read-Host "End Range? I.E. 192.168.1.30"
+$Sub = Read-Host "Subnet Mask? I.E. 255.255.255.128 for CIDR 25"
+$Description = Read-Host "Description"
+$Server =  Read-Host "Name of the server you want to install this scope on"
+$Lease = Read-Host "Lease time Format d.hr:min:sec 8.00:00:00 for 8 days"
+$ScopeID = Read-host "What Scope do you want to add exclusions to? I.E. Host for this scope 192.168.0.0"
+$Range3 = Read-Host "Exclusion Start Range"
+$Range4 = Read-Host "Exclusion End Range"
+$DNS = Read-Host "DNS Server IP?"
+$Router = Read-Host "Router IP ?"
+
+
+
+#Add Scope
+
+Add-DhcpServerv4Scope `
+-Name "$name" `
+-ComputerName "$Server" `
+-StartRange "$Range1" `
+-EndRange "$Range2" `
+-SubnetMask "$Sub" `
+-Description "$Description" `
+-LeaseDuration "$Lease" `
+-State Active
+
+# Add Options and Reservations
+
+Add-DhcpServerv4ExclusionRange `
+-ComputerName $server `
+-ScopeId $ScopeID `
+-StartRange $Range3 `
+-EndRange $Range4 
+
+#Set DNS and Router
+
+Set-DhcpServerv4OptionValue `
+-DnsServer $DNS `
+-Router $Router
