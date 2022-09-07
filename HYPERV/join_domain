@@ -1,0 +1,10 @@
+#Adds current computer to AD Domain
+#variables
+$Domain = Read-Host " What Domain do you want to join?"
+
+#commands
+add-computer `
+-domainname $Domain `
+-Credential `
+-restart `
+-Force
