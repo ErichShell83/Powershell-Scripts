@@ -1,0 +1,16 @@
+#Load Balance DHCP Failover
+#Variables
+$Name = Read-Host "What Name for this failover"
+$otherserv = Read-Host "Partner server -example 10.0.0.4"
+$ID = Read-Host "Scope ID you want this failover for -Example 10.0.0.0"
+$Bal = Read-Host "Load Balance Percentage"
+$Time = Read-Host "Switch over time -Format h:m:s"
+
+#CMDLETs
+Add-DhcpServerv4Failover `
+-Name $Name `
+-PartnerServer $otherserv `
+-ScopeId $ID `
+-AutoStateTransition $true `
+-LoadBalancePercent $Bal `
+-StateSwitchInterval $Time
