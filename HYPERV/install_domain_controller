@@ -1,0 +1,11 @@
+#Another Domain Controller Script
+#Skips Pre-checks
+$DName = read-host "Please enter the domain name"
+Install-ADDSDomainController `
+-SkipPreChecks `
+-DomainName $DName `
+-SiteName default-first-site-name `
+-DatabasePath c:\windows\ntds `
+-LogPath c:\windows\ntds `
+-SysvolPath c:\windows\sysbol `
+-InstallDNS
