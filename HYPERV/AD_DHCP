@@ -1,0 +1,9 @@
+#Install DHCP and ADDS
+
+Install-WindowsFeature `
+-Name AD-Domain-Services `
+-IncludeManagementTools
+
+Install-WindowsFeature `
+-Name DHCP `
+-IncludeManagementTools
