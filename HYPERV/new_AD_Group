@@ -1,0 +1,17 @@
+#Create New Group 
+#Variables
+$Name = Read-Host "What do you want to call this group?"
+$Server = Read-Host "NetBIOS name of Server?"
+$Type = Read-Host "Enter 1 for Global Group, or 0 for Domain Local"
+$Category = Read-Host "Enter 1 for Security, or 0 for Distribution"
+$OU = Read-Host "What OU do you want to add this group to?"
+
+
+#CommandLets
+#Change the 2 DC fields to your respective domain
+New-ADGroup `
+-Server $Server `
+-Path "Ou=$ou,dc=GFYS,dc=Net" `
+-GroupCategory $category `
+-GroupScope $type `
+-Name $Name
