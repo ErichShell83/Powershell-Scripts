@@ -1,0 +1,9 @@
+#Script to add a new domain through powershell in Server20xx
+Install-WindowsFeature -Name AD-Domain-Services -IncludeManagementTools
+
+Read-Host "Press Enter to continue"
+$Domain = Read-Host "Enter the Domain Name"
+$Pass = Read-Host "Enter the DSRM password " -AsSecureString
+Install-ADDSForest `
+-DomainName $Domain `
+-SafeModeAdministratorPassword $Pass
